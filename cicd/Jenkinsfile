@@ -1,0 +1,35 @@
+pipeline {
+  agent any
+
+  stages {
+    stage('Build') {
+      steps {
+        sh 'mvn clean package'
+      }
+    }
+
+    stage('Security Scan') {
+      steps {
+        sh 'trivy fs .'
+      }
+    }
+
+    stage('Docker Build') {
+      steps {
+        sh 'docker build -t user-service .'
+      }
+    }
+
+    stage('Push to ECR') {
+      steps {
+        sh 'docker push <ECR>'
+      }
+    }
+
+    stage('Deploy') {
+      steps {
+        sh 'helm upgrade --install sotamec ./helm'
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+replicaCount: 3
+
+image:
+  repository: <ECR_REPO>
+  tag: latest
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
