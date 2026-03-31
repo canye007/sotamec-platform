@@ -1,3 +1,7 @@
-public class ResourceNotFoundException {
-    
+package com.sotamec.user.exception;
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String msg) {
+        super(msg);
+    }
 }
